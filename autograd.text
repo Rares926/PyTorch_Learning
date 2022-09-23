@@ -1,0 +1,29 @@
+AUTOGRAD
+_____________________________________________________________________________________________
+
+To be able to calculate the gradients to a function with respect to a tensor 
+that tensor must have the "requires_grad" parameter equal to true
+
+Example: tensor_name=tensor.rand(3,requires_grad=True)
+
+If the requires_grad is set to true pytorch will automatically create and 
+store a function that can be used in backpropagation to get the gradients 
+
+Then using the backpropagation function as in the example 
+x will get the gradients values in the x.grad 
+
+
+!!! THE "backward" function can only be called if the tensors on which
+ is called have the required_grad attribute equal to true 
+
+
+When we want to update weights we should set the gradients to false so that 
+the opperations done in the update step should not part of the gradient computations
+
+WAYS TO PREVENT THE WEIGHTS UPDATE FROM TRAKING THE GRADIENTS:
+1)x.requires_grad_(False)
+2)x.detach()  --> this will create a new tensor that doesn t require the greadients 
+3)with torch.no_grad()
+
+
+When a function has an underscore(_) in it means that the function will change the variable in place

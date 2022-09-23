@@ -1,0 +1,8 @@
+FEED FORWARD NEURAL NETWORK
+_______________________________________________________________________________________________
+1) device config set it if is either cpu or gpu 
+2) hyper parameters as input size,nr of hidden layer,number of classes,learning rate etc
+3) loading and preprocessing the data and then wrapping it up with the DataLoader
+4) creating the model
+5) loss and optimizer 
+6) training the model 

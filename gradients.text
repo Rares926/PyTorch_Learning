@@ -1,0 +1,14 @@
+
+GRADIENTS
+_________________________________________________________________________________________________
+
+
+1) Design model (input, output size,forward pass)
+2) Construct loss and optimizer 
+3) Training loop 
+    -forward pass: compute prediction 
+    -bacward pass: gradients 
+    -update weights 
+    -empty gradients 
+    -info 
+

@@ -1,0 +1,19 @@
+ACTIVATION FUNCTIONS
+_______________________________________________________________________________________________
+
+-If u dont't know what to use just use a ReLU
+-(Leaky ReLU is an improved version of ReLU -tries to resolve the vanishing gradient problem)
+
+-Tanh is good for hidden layers 
+
+-Sigmoid is tipically used in the last layer if a binary classification problem 
+
+We can use activation functions in 2 ways:
+    1)with nn modules: create specific layers in the init of the NeuralNet
+        Ex:self.relu=nn.ReLU()
+    2)use activations direclty in the forward pass
+        Ex:out=torch.relu(self.linear1(x))
+
+
+Usually activation functions are available in torch.nn.
+Some activations are available only in torch.nn.functional witch is usually imported s F.

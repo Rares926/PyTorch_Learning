@@ -1,0 +1,21 @@
+
+TRAINING PIPELINE
+_________________________________________________________________________________________________
+
+
+1) Design model (input, output size,forward pass)
+2) Construct loss and optimizer 
+3) Training loop 
+    -forward pass: compute prediction 
+    -bacward pass: gradients 
+    -update weights 
+
+
+So to start a train 
+
+Create a specific model for our problem 
+    1)create a simple model 
+    2)create it implementing a nn.Module class that has __init__ and forward functions
+    
+Decide on a loss function 
+Decide on a suited optimizer 

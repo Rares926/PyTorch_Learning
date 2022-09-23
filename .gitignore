@@ -1,0 +1,10 @@
+**/__pycache__/
+**/assets/
+**/datasets/
+
+# lint
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+

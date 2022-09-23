@@ -1,0 +1,7 @@
+BACKPROPAGATION
+____________________________________________________________________________________________
+
+STEPS OF AN USUAL TRAINING:
+1)Forward pass : Compute loss
+2)Compute local gradients
+3)Backward pass: Compute dloss/dWeights using Chain Rule

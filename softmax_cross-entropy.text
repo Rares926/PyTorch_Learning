@@ -1,0 +1,32 @@
+Cross-Entropy- the better is our prediction the lower is the loss
+
+#
+#        -> 2.0              -> 0.65  
+# Linear -> 1.0  -> Softmax  -> 0.25   -> CrossEntropy(y, y_hat)
+#        -> 0.1              -> 0.1                   
+#
+#     scores(logits)      probabilities
+#                           sum = 1.0
+#
+
+# Softmax applies the exponential function to each element, and normalizes
+# by dividing by the sum of all these exponentials
+# -> squashes the output to be between 0 and 1 = probability
+# sum of all probabilities is 1
+
+
+# Cross entropy
+# Cross-entropy loss, or log loss, measures the performance of a classification model 
+# whose output is a probability value between 0 and 1. 
+# -> loss increases as the predicted probability diverges from the actual label
+
+# y must be one hot encoded
+# if class 0: [1 0 0]
+# if class 1: [0 1 0]
+# if class 2: [0 0 1]
+ 
+
+
+# Binary classification The last neuron has a bigger or smaller value that 50 let's say
+
+# Multiclass classification Biggest value from a neuron

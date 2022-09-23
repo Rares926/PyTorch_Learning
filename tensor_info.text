@@ -1,0 +1,53 @@
+TENSOR
+___________________________________________________________________________________________________________
+
+To create a tensor variable we have to specify the type of tensor and it's sizes. 
+
+        (type)  (sizes)
+torch   .empty  (2,3)
+        .rand
+        .ones
+        .zeros
+        .tensor([])
+
+
+There are three methods to do operations between tensors
+
+1)  normal ones using (+,_,/,........etc)       z=x+y
+2)  using functions                             z=torch.add(x,y)
+3)  using in place functions                    y.add(x)   
+
+!Tensors can be sliced the same as numpy arrays
+
+Reshaping can be done using .view 
+        where we have to specify the new sizes 
+        or we can specify a size a let -1 to the other so that pytorch will automatically determine the rigth size for the other 
+
+
+Converting a numpy to a tensor and viceversa:
+
+!NUMPY can only handle cpu tensors so if a tensor is created on the gpu it can't be converted to numpy 
+1)tensor to numpy using tensor_name.numpy()
+2)numpy to tensor using torch.from_numpy(numpy_array_name)
+
+
+
+ALL THE TRAINING SHOULD BE DONE ON THE GPU 
+
+-check if the gpu is available 
+        torch.cuda.is_available() returns a boolean value
+
+SET A DEVICE
+
+device=torch.device("cuda") --> set the device to be on the GPU 
+
+THERE ARE 2 WAYS TO CREATE A TESNOR ON THE DEVICE:
+
+1)create it directly on the device
+        tensor_name=torch.ones(4,device="cuda")
+
+2)create it normally and send it to the device
+        tensor_name=torch.ones(4)
+        tensor_name.to(device)
+
+

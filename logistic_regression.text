@@ -1,0 +1,21 @@
+
+LOGISTIC REGRESSION
+_________________________________________________________________________________________________
+
+
+1) Design model (input, output size,forward pass)
+    Best to create a personal class that implements nn.Module
+        it has to have 2 functions implemented:
+            -init
+            -forward
+            
+2) Construct loss and optimizer 
+    loss : comes from torch.nn
+    optimizer: comes from 
+
+3) Training loop 
+    -forward pass: compute prediction       model(data)
+    -bacward pass: gradients                .backward()
+    -update weights                         .step() 
+    -empty gradients                        .zero_grad()
+    -info 
