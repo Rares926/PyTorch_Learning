@@ -1,4 +1,4 @@
-import torch 
+import torch
 import torch.nn as nn
 import torch.nn.functional as F
 
@@ -13,14 +13,14 @@ sm = nn.Softmax(dim=0)
 output = sm(x)
 print(output)
 
-# sigmoid 
+# sigmoid
 output = torch.sigmoid(x)
 print(output)
 s = nn.Sigmoid()
 output = s(x)
 print(output)
 
-#tanh
+# tanh
 output = torch.tanh(x)
 print(output)
 t = nn.Tanh()
@@ -42,31 +42,31 @@ output = lrelu(x)
 print(output)
 
 
-#option 1 (create nn modules)
+# option 1 (create nn modules)
 class NeuralNet(nn.Module):
-    def __init__(self,input_size,hidden_size) -> None:
-        super(NeuralNet,self).__init__()
-        self.linear1=nn.Linear(input_size,hidden_size)
-        self.relu=nn.Relu()
-        self.linear2=nn.Linear(hidden_size,1)
-        self.sigmoid=nn.Sigmoid()
+    def __init__(self, input_size, hidden_size) -> None:
+        super(NeuralNet, self).__init__()
+        self.linear1 = nn.Linear(input_size, hidden_size)
+        self.relu = nn.Relu()
+        self.linear2 = nn.Linear(hidden_size, 1)
+        self.sigmoid = nn.Sigmoid()
 
-    def forward(self,x):
-        out=self.linear1(x)
-        out=self.relu(out)
-        out=self.linear2(out)
-        out=self.sigmoid(out)
+    def forward(self, x):
+        out = self.linear1(x)
+        out = self.relu(out)
+        out = self.linear2(out)
+        out = self.sigmoid(out)
         return out
 
 
-#option 2 (use activation functions directly in forward pass)
-class NeuralNet(nn.Module):
-    def __init__(self,input_size,hidden_size) -> None:
-        super(NeuralNet,self).__init__()
-        self.linear1=nn.Linear(input_size,hidden_size)
-        self.linear2=nn.Linear(hidden_size,1)
+# option 2 (use activation functions directly in forward pass)
+class NeuralNet2(nn.Module):
+    def __init__(self, input_size, hidden_size) -> None:
+        super(NeuralNet, self).__init__()
+        self.linear1 = nn.Linear(input_size, hidden_size)
+        self.linear2 = nn.Linear(hidden_size, 1)
 
-    def forward(self,x):
-        out=torch.relu(self.linear1(x))
-        out=torch.sigmoid(self.linear2(out))
+    def forward(self, x):
+        out = torch.relu(self.linear1(x))
+        out = torch.sigmoid(self.linear2(out))
         return out

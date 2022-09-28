@@ -9,12 +9,12 @@ import numpy as np
 # Device configuration
 device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
 
-# Hyper-parameters 
+# Hyper-parameters
 num_epochs = 5
 batch_size = 4
 learning_rate = 0.001
 
-# dataset has PILImage images of range [0, 1]. 
+# dataset has PILImage images of range [0, 1].
 # We transform them to Tensors of normalized range [-1, 1]
 
 transform = transforms.Compose(
@@ -23,19 +23,20 @@ transform = transforms.Compose(
 
 # CIFAR10: 60000 32x32 color images in 10 classes, with 6000 images per class
 train_dataset = torchvision.datasets.CIFAR10(root='./assets', train=True,
-                                        download=True, transform=transform)
+                                             download=True, transform=transform)
 
 test_dataset = torchvision.datasets.CIFAR10(root='./assets', train=False,
-                                       download=True, transform=transform)
+                                            download=True, transform=transform)
 
 train_loader = torch.utils.data.DataLoader(train_dataset, batch_size=batch_size,
-                                          shuffle=True)
+                                           shuffle=True)
 
 test_loader = torch.utils.data.DataLoader(test_dataset, batch_size=batch_size,
-                                         shuffle=False)
+                                          shuffle=False)
 
 classes = ('plane', 'car', 'bird', 'cat',
            'deer', 'dog', 'frog', 'horse', 'ship', 'truck')
+
 
 def imshow(img):
     img = img / 2 + 0.5  # unnormalize
@@ -44,10 +45,11 @@ def imshow(img):
     plt.show()
 
 
-dataiter=iter(train_loader)
-images,labels=dataiter.next()
+dataiter = iter(train_loader)
+images, labels = dataiter.next()
 
 imshow(torchvision.utils.make_grid(images))
+
 
 class ConvNet(nn.Module):
     def __init__(self):
@@ -70,70 +72,65 @@ class ConvNet(nn.Module):
         return x
 
 
+model = ConvNet().to(device)
 
-model=ConvNet().to(device)
+criterion = nn.CrossEntropyLoss()
+optimizer = torch.optim.SGD(model.parameters(), lr=learning_rate)
 
-criterion=nn.CrossEntropyLoss()
-optimizer=torch.optim.SGD(model.parameters(),lr=learning_rate)
-
-n_total_steps=len(train_loader)
+n_total_steps = len(train_loader)
 
 for epoch in range(num_epochs):
-    for i, (images,labels) in enumerate(train_loader):
-        
-        images=images.to(device)
-        labels=labels.to(device)
+    for i, (images, labels) in enumerate(train_loader):
 
-        #forward pass and loss
-        outputs=model(images)
-        loss=criterion(outputs,labels)
+        images = images.to(device)
+        labels = labels.to(device)
 
-        #backward
+        # forward pass and loss
+        outputs = model(images)
+        loss = criterion(outputs, labels)
+
+        # backward
         loss.backward()
 
-        #compute gradients
+        # compute gradients
         optimizer.step()
 
-        #clear gradients
+        # clear gradients
         optimizer.zero_grad()
 
         if (i+1) % 2000 == 0:
-            print (f'Epoch [{epoch+1}/{num_epochs}], Step [{i+1}/{n_total_steps}], Loss: {loss.item():.4f}')
+            print(f'Epoch [{epoch+1}/{num_epochs}], Step [{i+1}/{n_total_steps}], Loss: {loss.item():.4f}')
 
 print("Finish training")
 
-with torch.no_grad(): # because we don t use backward while evaluating
-    n_correct=0
-    n_samples=0
-    n_class_correct=[0 for i in range(10)]
-    n_class_samples=[0 for i in range(10)]
+with torch.no_grad():  # because we don t use backward while evaluating
+    n_correct = 0
+    n_samples = 0
+    n_class_correct = [0 for i in range(10)]
+    n_class_samples = [0 for i in range(10)]
 
-    for images,labels in test_loader:
+    for images, labels in test_loader:
 
-        images=images.to(device)
-        labels=labels.to(device)
-        outputs=model(images)
+        images = images.to(device)
+        labels = labels.to(device)
+        outputs = model(images)
 
-        _,predicted=torch.max(outputs,1)
-        n_samples+=labels.size(0)
-        n_correct+=(predicted==labels).sum().item()
+        _, predicted = torch.max(outputs, 1)
+        n_samples += labels.size(0)
+        n_correct += (predicted == labels).sum().item()
 
         for i in range(batch_size):
-            label=labels[i]
-            pred=predicted[i]
-            if(label==pred):
-                n_class_correct[label]+=1
-            n_class_samples[label]+=1
+            label = labels[i]
+            pred = predicted[i]
+            if (label == pred):
+                n_class_correct[label] += 1
+            n_class_samples[label] += 1
 
-    #the accuracy of the total network
+    # the accuracy of the total network
     acc = 100.0 * n_correct / n_samples
     print(f'Accuracy of the network: {acc} %')
 
-    #te accuracy for each single class
+    # the accuracy for each single class
     for i in range(10):
         acc = 100.0 * n_class_correct[i] / n_class_samples[i]
         print(f'Accuracy of {classes[i]}: {acc} %')
-
-
-
-

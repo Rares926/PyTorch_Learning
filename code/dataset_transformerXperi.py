@@ -2,10 +2,9 @@ import os
 from PIL import Image
 from torch.utils.data import Dataset
 import numpy as np
-import albumentations as A  #python library for image augmentations
-from albumentations.pytorch import ToTensorV2 #Convert image and mask to torch.Tensor and divide by 255 if image or mask are uint8 type
+import albumentations as A  # python library for image augmentations
+from albumentations.pytorch import ToTensorV2  # Convert image and mask to torch.Tensor and divide by 255 if image or mask are uint8 type
 # Internal framework imports
-
 
 
 class CarvanaDataset(Dataset):
@@ -25,7 +24,6 @@ class CarvanaDataset(Dataset):
         mask = np.array(Image.open(mask_path), dtype=np.float32)
         mask[mask == 255.0] = 1.0
 
-
         if self.transform is not None:
             augmentations = self.transform(image=image, mask=mask)
             image = augmentations["image"]
@@ -33,10 +31,11 @@ class CarvanaDataset(Dataset):
 
         return image, mask
 
-dataset=CarvanaDataset()
+
+dataset = CarvanaDataset()
 
 IMAGE_HEIGHT = 160  # 1280 originally
-IMAGE_WIDTH  = 240  # 1918 originally
+IMAGE_WIDTH = 240  # 1918 originally
 
 train_transform = A.Compose(
         [
@@ -54,4 +53,4 @@ train_transform = A.Compose(
         ],
     )
 
-    # train_ds = CarvanaDataset(image_dir=train_dir,mask_dir=train_maskdir,transform=train_transform)
+# train_ds = CarvanaDataset(image_dir=train_dir,mask_dir=train_maskdir,transform=train_transform)
